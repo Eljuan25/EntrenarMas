@@ -1,47 +1,47 @@
+// src/data/routines.js
 export const routines = [
   {
     day: "Lunes",
+    focus: "Pecho",
     exercises: [
-      { name: "Flexiones", sets: 3, reps: 12 },
-      { name: "Fondos", sets: 3, reps: 10 },
-      { name: "Plancha", sets: 3, reps: 30 },
-      { name: "Aperturas con botellas", sets: 3, reps: 15 }
+      { name: "Flexiones Normales", sets: 4, reps: "12-15", rest: 60, notes: "Core apretado", image: "" },
+      { name: "Flexiones Diamante", sets: 4, reps: "10-12", rest: 75, notes: "Enfocado en tríceps" },
+      { name: "Aperturas con Botellas", sets: 4, reps: "15", rest: 60 },
+      { name: "Fondos en Silla", sets: 3, reps: "12", rest: 90 }
     ]
   },
   {
     day: "Martes",
+    focus: "Piernas y Glúteos",
     exercises: [
-      { name: "Sentadillas", sets: 4, reps: 15 },
-      { name: "Zancadas", sets: 3, reps: 12 },
-      { name: "Puente de glúteo", sets: 3, reps: 15 },
-      { name: "Elevación de talones", sets: 4, reps: 20 }
+      { name: "Sentadillas", sets: 4, reps: "15-20", rest: 90 },
+      { name: "Zancadas", sets: 4, reps: "12 por pierna", rest: 75 },
+      { name: "Puente de Glúteos", sets: 4, reps: "20", rest: 60 },
+      { name: "Elevación de Talones", sets: 4, reps: "20", rest: 45 }
     ]
   },
   {
     day: "Miércoles",
+    focus: "Bíceps y Tríceps",
     exercises: [
-      { name: "Remo con mochila", sets: 3, reps: 12 },
-      { name: "Curl de bíceps", sets: 3, reps: 12 },
-      { name: "Superman", sets: 3, reps: 15 },
-      { name: "Plancha lateral", sets: 3, reps: 20 }
+      { name: "Curl de Bíceps con Botellas", sets: 4, reps: "15", rest: 60 },
+      { name: "Fondos en Silla", sets: 4, reps: "12", rest: 75, notes: "Enfocado en tríceps" },
+      { name: "Martillo con Botellas", sets: 3, reps: "15", rest: 60 },
+      { name: "Extensiones de Tríceps", sets: 4, reps: "12", rest: 60, notes: "Sobre la cabeza" }
     ]
   },
   {
     day: "Jueves",
+    focus: "Espalda y Core",
     exercises: [
-      { name: "Mountain climbers", sets: 3, reps: 30 },
-      { name: "Burpees", sets: 3, reps: 10 },
-      { name: "Abdominales", sets: 3, reps: 20 },
-      { name: "Plancha", sets: 3, reps: 30 }
-    ]
-  },
-  {
-    day: "Viernes",
-    exercises: [
-      { name: "Sentadillas", sets: 3, reps: 15 },
-      { name: "Flexiones", sets: 3, reps: 12 },
-      { name: "Burpees", sets: 3, reps: 10 },
-      { name: "Plancha", sets: 3, reps: 30 }
+      { name: "Superman", sets: 4, reps: "15", rest: 60 },
+      { name: "Remo con Mochila", sets: 4, reps: "12", rest: 75 },
+      { name: "Plancha", sets: 4, reps: "45-60 seg", rest: 60 },
+      { name: "Mountain Climbers", sets: 4, reps: "40", rest: 60 }
     ]
   }
 ];
+
+export const getRoutineByDay = (day) => {
+  return routines.find(r => r.day === day) || routines[0];
+};

@@ -1,69 +1,54 @@
-import React, { useState } from "react";
-import { routines } from "./data/routines";
+// src/App.js
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import Profile from "./pages/Profile";
+import RoutinesPage from "./pages/RoutinesPage";
 import "./index.css";
-import { calculateMultiplier } from "./utils/logic";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 function App() {
-  const [day, setDay] = useState("Lunes");
-  const [weight, setWeight] = useState("");
-  const [height, setHeight] = useState("");
-  const [goal, setGoal] = useState("bajar");
-  const [level, setLevel] = useState("principiante");
+  const [profile, setProfile] = useState({
+    weight: 70,
+    height: 170,
+    bodyFat: 18,
+    goal: "musculo",
+    level: "principiante",
+  });
 
-  const routine = routines.find(r => r.day === day);
+  const [week, setWeek] = useState(1);
 
-  const multiplier = calculateMultiplier(weight, goal, level);
+  // Guardar en localStorage
+  useEffect(() => {
+    const saved = localStorage.getItem("entrenamas_profile");
+    if (saved) setProfile(JSON.parse(saved));
+  }, []);
 
+  useEffect(() => {
+    localStorage.setItem("entrenamas_profile", JSON.stringify(profile));
+  }, [profile]);
   return (
-    <div className="app">
-      <h1 className="title"> EntrenaMas</h1>
+      <Router>
+        <div className="app-container">
+          <Header />
 
-      {/* CONFIG */}
-      <div className="card">
-        <h2>Configura tu rutina</h2>
+          <main className="main-content">
+            <Routes>
+              <Route path="/" element={<Navigate to="/perfil" replace />} />
+              <Route 
+                path="/perfil" 
+                element={<Profile profile={profile} setProfile={setProfile} />} 
+              />
+              <Route 
+                path="/rutinas" 
+                element={<RoutinesPage profile={profile} week={week} setWeek={setWeek} />} 
+              />
+            </Routes>
+          </main>
 
-        <input
-          placeholder="Peso (kg)"
-          onChange={(e) => setWeight(e.target.value)}
-        />
-
-        <input
-          placeholder="Altura (cm)"
-          onChange={(e) => setHeight(e.target.value)}
-        />
-
-        <select onChange={(e) => setGoal(e.target.value)}>
-          <option value="bajar">Bajar grasa</option>
-          <option value="musculo">Ganar músculo</option>
-        </select>
-
-        <select onChange={(e) => setLevel(e.target.value)}>
-          <option value="principiante">Principiante</option>
-          <option value="intermedio">Intermedio</option>
-        </select>
-       <button className="btn">Generar rutina</button>
-      </div>
-
-      {/* SELECT DAY */}
-      <select onChange={(e) => setDay(e.target.value)}>
-        {routines.map((r, i) => (
-          <option key={i}>{r.day}</option>
-        ))}
-      </select>
-
-      {/* RUTINA */}
-      <div className="card">
-        <h2>{routine.day}</h2>
-
-        {routine.exercises.map((ex, i) => (
-          <p key={i}>
-             {ex.name} — {Math.round(ex.sets * multiplier)} x {Math.round(ex.reps * multiplier)}
-          </p>
-        ))}
-          
-
-      </div>
-    </div>
+          <Footer />
+        </div>
+      </Router>
   );
 }
 
