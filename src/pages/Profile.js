@@ -11,7 +11,7 @@ function Profile({ profile, setProfile }) {
   const getBMICategory = (bmi) => {
     if (bmi < 18.5) return { text: "Bajo peso", color: "#ffc107" };
     if (bmi < 25) return { text: "Normal", color: "#4caf50" };
-    if (bmi < 30) return { text: "Sobrepeso", color: "#ff9800" };
+    if (bmi < 30) return { text: "Muy pasado de peso", color: "#ff9800" };
     return { text: "Obesidad", color: "#f44336" };
   };
 

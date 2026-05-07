@@ -1,16 +1,27 @@
 // src/components/Routines.js
+
 import React, { useState } from "react";
 import { routines, getRoutineByDay } from "../data/routines";
 import { calculateMultiplier } from "../utils/logic";
 
-function Routines({ weight, goal, level, week, setWeek }) {
+function Routines({
+  weight,
+  height,
+  goal,
+  level,
+  gender,
+  week,
+  setWeek
+}) {
   const [day, setDay] = useState("Lunes");
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const routine = getRoutineByDay(day);
   const multiplier = calculateMultiplier(weight, goal, level);
 
   return (
     <div>
+      {/* Selector de días */}
       <div className="day-selector">
         {routines.map((r) => (
           <button
@@ -23,41 +34,75 @@ function Routines({ weight, goal, level, week, setWeek }) {
         ))}
       </div>
 
+      {/* Rutina */}
       <div className="card routine">
-        <h2>{routine.day} — {routine.focus}</h2>
+        <h2>
+          {routine.day} — {routine.focus}
+        </h2>
+
         <p className="multiplier">
-          Ajuste según tu perfil: <strong>x{multiplier.toFixed(1)}</strong>
+          Ajuste según tu perfil:{" "}
+          <strong>x{multiplier.toFixed(1)}</strong>
         </p>
 
-        {routine.exercises.map((ex, i) => (
-          <div key={i} className="exercise-card">
-            {/* Imagen local (puedes agregar después) */}
+        {/* Ejercicios */}
+        {routine.exercises.map((ex, index) => (
+          <div key={index} className="exercise-card">
+
+            {/* Imagen */}
             {ex.image && (
-              <div className="exercise-image">
-                <img 
-                  src={ex.image} 
-                  alt={ex.name} 
+              <div
+                className="exercise-image"
+                onClick={() => setSelectedImage(ex.image)}
+              >
+                <img
+                  src={ex.image}
+                  alt={ex.name}
                   loading="lazy"
                 />
               </div>
             )}
 
+            {/* Información */}
             <div className="exercise-info">
               <h3>{ex.name}</h3>
+
               <p>
                 <strong>
-                  {Math.round(ex.sets * multiplier)} series × {ex.reps}
-                </strong><br />
-                Descanso: {ex.rest}s {ex.notes && `— ${ex.notes}`}
+                {Math.ceil(ex.sets * multiplier)} series × {ex.reps}
+                </strong>
+
+                <br />
+
+                Descanso: {ex.rest}s{" "}
+                {ex.notes && `— ${ex.notes}`}
               </p>
             </div>
           </div>
         ))}
       </div>
 
-      <button className="big-btn" onClick={() => setWeek(w => w + 1)}>
+      {/* Botón */}
+      <button
+        className="big-btn"
+        onClick={() => setWeek((w) => w + 1)}
+      >
         Completé esta semana → Semana {week + 1}
       </button>
+
+      {/* Modal de imagen */}
+      {selectedImage && (
+        <div
+          className="image-modal"
+          onClick={() => setSelectedImage(null)}
+        >
+          <img
+            src={selectedImage}
+            alt="Ejercicio ampliado"
+            className="modal-image"
+          />
+        </div>
+      )}
     </div>
   );
 }

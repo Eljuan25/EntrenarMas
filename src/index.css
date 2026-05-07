@@ -278,3 +278,59 @@ input, select {
   font-size: 1.05rem;
   line-height: 1.5;
 }
+
+
+.exercise-card {
+  background: #1f1f1f;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.exercise-image img {
+  width: 100%;
+  display: block;
+  border-radius: 15px;
+}
+
+.exercise-info {
+  padding: 15px;
+}
+
+.exercise-image {
+  cursor: pointer;
+}
+
+.exercise-image img {
+  width: 100%;
+  border-radius: 15px;
+  transition: transform 0.2s ease;
+}
+
+.exercise-image img:hover {
+  transform: scale(1.02);
+}
+
+/* MODAL */
+
+.image-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  padding: 20px;
+}
+
+.modal-image {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(255,255,255,0.2);
+}
