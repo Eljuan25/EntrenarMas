@@ -1,6 +1,6 @@
 // src/components/Routines.js
 
-import React, { useState } from "react";
+import react from "react";
 import { routines, getRoutineByDay } from "../data/routines";
 import { calculateMultiplier } from "../utils/logic";
 
