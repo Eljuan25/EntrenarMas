@@ -59,8 +59,26 @@ export const routines = [
       { name: "Remo Australiano", sets: 4, reps: "10-15 ", rest: 60, image: RemoAustraliano },
       { name: "Elevaciones de Rodillas en Barra", sets: 4, reps: "15", rest: 60,image: EvalacionRodillas }
     ]
+  },
+
+  {
+    day: "Viernes",
+
+    focus: "Full Body",
+    exercises: [
+
+    {name: "Sentadillas", set:3, reps: 15},
+    {name: "Flexiones", set:3, reps: 12},
+    {name: "Dominadas", set:3, reps: 30},
+    {name: "Correr", set:60, reps: 15},
+
+    
+    ]
+
   }
+
 ];
+
 
 export const getRoutineByDay = (day) => {
   return routines.find(r => r.day === day) || routines[0];

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Profile from "./pages/Profile";
 import RoutinesPage from "./pages/RoutinesPage";
+import Home from "./pages/Home";           
 import "./index.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -27,28 +28,35 @@ function App() {
   useEffect(() => {
     localStorage.setItem("entrenamas_profile", JSON.stringify(profile));
   }, [profile]);
+
   return (
-      <Router>
-        <div className="app-container">
-          <Header />
+    <Router>
+      <div className="app-container">
+        <Header />
 
-          <main className="main-content">
-            <Routes>
-              <Route path="/" element={<Navigate to="/perfil" replace />} />
-              <Route 
-                path="/perfil" 
-                element={<Profile profile={profile} setProfile={setProfile} />} 
-              />
-              <Route 
-                path="/rutinas" 
-                element={<RoutinesPage profile={profile} week={week} setWeek={setWeek} />} 
-              />
-            </Routes>
-          </main>
+        <main className="main-content">
+          <Routes>
+            {/* Página de inicio nueva */}
+            <Route path="/" element={<Home />} />
+            
+            <Route 
+              path="/perfil" 
+              element={<Profile profile={profile} setProfile={setProfile} />} 
+            />
+            
+            <Route 
+              path="/rutinas" 
+              element={<RoutinesPage profile={profile} week={week} setWeek={setWeek} />} 
+            />
 
-          <Footer />
-        </div>
-      </Router>
+            {/* Por si alguien pone una ruta rara, lo mandamos al home */}
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </main>
+
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
