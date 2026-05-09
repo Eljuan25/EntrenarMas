@@ -15,6 +15,7 @@ import Dominada from "../assets/Dominada.jpg";
 import RemoAustraliano from "../assets/RemoAustraliano.jpg";
 import ChinUps from "../assets/ChinUps.jpg";
 import EvalacionRodillas from "../assets/EvaluacionDerodillas.jpeg";
+import Correr from "../assets/Correrer.jpg"
 
 
 
@@ -63,14 +64,13 @@ export const routines = [
 
   {
     day: "Viernes",
-
     focus: "Full Body",
     exercises: [
 
-    {name: "Sentadillas", set:3, reps: 15},
-    {name: "Flexiones", set:3, reps: 12},
-    {name: "Dominadas", set:3, reps: 30},
-    {name: "Correr", set:60, reps: 15},
+    {name: "Sentadillas", sets:3, reps: 15,rest:90, image: Sentadilla},
+    {name: "Flexiones", sets:3, reps: 12,rest:60, image: FlexionNormal},
+    {name: "Dominadas", sets:3, reps: 30,resto:90,image: Dominada},
+    {name: "Correr", sets:60, reps: 15,resto:0,notes:"Cardio", image: Correr},
 
     
     ]
