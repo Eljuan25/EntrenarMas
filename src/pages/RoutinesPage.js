@@ -2,14 +2,22 @@
 import React from "react";
 import Routines from "../components/Routines";
 
-function RoutinesPage({ profile, setWeek, week }) {
+function RoutinesPage({ profile, week, setWeek }) {
+  if (!profile) {
+    return <div className="card">Cargando perfil...</div>;
+  }
+
+  const { weight, height, goal, level, gender = "hombre" } = profile;
+
   return (
-    <Routines 
-      weight={profile.weight} 
-      goal={profile.goal} 
-      level={profile.level} 
-      week={week} 
-      setWeek={setWeek} 
+    <Routines
+      weight={weight}
+      height={height}
+      goal={goal}
+      level={level}
+      gender={gender}
+      week={week}
+      setWeek={setWeek}
     />
   );
 }

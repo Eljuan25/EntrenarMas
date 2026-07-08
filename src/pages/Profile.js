@@ -5,13 +5,14 @@ import { useNavigate } from "react-router-dom";
 function Profile({ profile, setProfile }) {
   const navigate = useNavigate();
 
-  const { weight, height, bodyFat, goal, level } = profile;
+  const { weight, height, bodyFat, goal, level, gender } = profile;
 
   const bmi = (weight / ((height / 100) ** 2)).toFixed(1);
+
   const getBMICategory = (bmi) => {
     if (bmi < 18.5) return { text: "Bajo peso", color: "#ffc107" };
     if (bmi < 25) return { text: "Normal", color: "#4caf50" };
-    if (bmi < 30) return { text: "Muy pasado de peso", color: "#ff9800" };
+    if (bmi < 30) return { text: "Sobrepeso", color: "#ff9800" };
     return { text: "Obesidad", color: "#f44336" };
   };
 
@@ -19,12 +20,24 @@ function Profile({ profile, setProfile }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setProfile(prev => ({ ...prev, [name]: name === "goal" || name === "level" ? value : Number(value) }));
+    setProfile(prev => ({ 
+      ...prev, 
+      [name]: (name === "goal" || name === "level" || name === "gender") 
+        ? value 
+        : Number(value) 
+    }));
   };
 
   return (
     <div className="card profile">
       <h2>Tu Perfil</h2>
+
+      <label>Género:
+        <select name="gender" value={gender || "hombre"} onChange={handleChange}>
+          <option value="hombre">Hombre</option>
+          <option value="mujer">Mujer</option>
+        </select>
+      </label>
 
       <label>Peso (kg):
         <input type="number" name="weight" value={weight} onChange={handleChange} />
