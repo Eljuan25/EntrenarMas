@@ -18,7 +18,7 @@ import ChinUps from "../assets/ChinUps.jpg";
 import EvalacionRodillas from "../assets/EvaluacionDerodillas.jpeg";
 import Correr from "../assets/Correrer.jpg";
 import PressBanca from "../assets/PressBanca.jpg";
-import { name } from "tar/types";
+
 
 
 // import PressInclinado from "../assets/PressInclinado.jpg";
